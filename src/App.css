@@ -36,3 +36,46 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+background:url("https://thumbs.dreamstime.com/b/abstract-gradient-blue-light-background-retro-colors-lot-space-text-composition-art-image-website-magazine-97327659.jpg");
+/* background-color: rgb(198, 250, 226); */
+background-size: cover;
+}
+ .card
+ {
+  background-color:rgb(69, 196, 177) ;
+  box-shadow: 0px 0px 5px black;
+ }
+
+ .nav-item{
+  padding:0 10px
+ }
+ .nav-link{
+  font-size: 1.16rem;
+  border-radius: 5px;
+  transition: 0.4s;
+ }
+ .nav-link:hover{
+  background-color: rgb(8, 116, 152);
+ }
+.asset1{
+  color: rgb(67, 95, 239);
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  text-decoration: underline;
+}
+ .navbar-brand{
+  font-size: 1.6rem;
+  font-weight: bold;
+ }
+ .btn1{
+  background-color:rgb(14, 146, 54);
+  color: white;
+  border: none;
+  box-shadow: 0px 0px 4px black;
+ }
+
+.card:hover{
+  box-shadow: 0px 0px 15px black;
+}
