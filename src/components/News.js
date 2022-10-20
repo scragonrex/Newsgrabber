@@ -69,7 +69,7 @@ export class News extends Component {
     console.log(this.state.page);
     this.props.setProgress(10);
     console.log(this.state.page);
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+    let url = "https://newsapi.org/v2/top-headlines?sources=google-news-in&apiKey=83f0401628484983a8b6ef6dc468d0e6";
    
     let data = await fetch(url);
     this.props.setProgress(30);
