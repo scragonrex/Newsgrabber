@@ -20,29 +20,51 @@ export class News extends Component {
     document.title = `${this.props.category}-Newsgrabber`;
 
   }
+  options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'a47529c91emsha25daef1e66a341p1ba7adjsn5c4aed17e5e6',
+      'X-RapidAPI-Host': 'newsdata2.p.rapidapi.com'
+    }
+  }
   async updatePage() {
-    console.log("updatePage")
+    // console.log("updatePage")
+    // this.props.setProgress(10);
+    // console.log(this.state.page);
+    // let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+
+    // let data = await fetch(url);
+    // this.props.setProgress(30);
+    // let parsedData = await data.json();
+    // this.props.setProgress(50);
+    // console.log(parsedData);
+    // this.setState({
+    //   articles: parsedData.articles,
+    //   totalResults: parsedData.totalResults,
+
+    // });
+    // console.log(this.state.articles);
+    // this.props.setProgress(100);
+    
     this.props.setProgress(10);
-    console.log(this.state.page);
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-
-    let data = await fetch(url);
-    this.props.setProgress(30);
-    let parsedData = await data.json();
-    this.props.setProgress(50);
-    console.log(parsedData);
-    this.setState({
-      articles: parsedData.articles,
-      totalResults: parsedData.totalResults,
-
-    });
-    this.props.setProgress(100);
-
+    let data=await fetch(`https://newsdata2.p.rapidapi.com/news?country=${this.props.country}&category=${this.props.category}&language=en&page=${this.state.page}`, this.options)
+      .catch(err => console.error(err));
+      this.props.setProgress(30);
+      let parsedData = await data.json();
+      this.props.setProgress(50);
+      this.setState({
+      articles: parsedData.results,
+       totalResults: parsedData.totalResults,
+  
+      });
+      console.log(parsedData);
+      console.log(this.state.articles);
+      this.props.setProgress(100);
   }
   async componentDidMount() {
     this.updatePage();
   }
-  // handlePrevClick = async () => {
+  handlePrevClick = async () => {
 
   //   this.setState({ page: this.state.page - 1 });
   //   console.log(this.state.page);
@@ -63,8 +85,21 @@ export class News extends Component {
   //   });
   //   this.props.setProgress(100);
   //   this.setState({ page: this.state.page - 1 });
-  // }
-  // handleNextClick = async () => {
+  this.props.setProgress(10);
+    let data=await fetch(`https://newsdata2.p.rapidapi.com/news?country=${this.props.country}&category=${this.props.category}&language=en&page=${this.state.page-1}`, this.options)
+      .catch(err => console.error(err));
+      this.props.setProgress(30);
+      let parsedData = await data.json();
+      this.props.setProgress(50);
+      this.setState({
+      articles: parsedData.results,
+       totalResults: parsedData.totalResults,
+  page:this.state.page-1
+      });
+  this.props.setProgress(100);
+
+  }
+  handleNextClick = async () => {
 
 
   //   console.log(this.state.page);
@@ -84,20 +119,31 @@ export class News extends Component {
   //   });
   //   this.props.setProgress(100);
   //   this.setState({ page: this.state.page + 1 });
-  // }
-  fetchMoreData=async()=>{
-   
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+  this.props.setProgress(10);
+    let data=await fetch(`https://newsdata2.p.rapidapi.com/news?country=${this.props.country}&category=${this.props.category}&language=en&page=${this.state.page+1}`, this.options)
+      .catch(err => console.error(err));
+      this.props.setProgress(30);
+      let parsedData = await data.json();
+      this.props.setProgress(50);
+      this.setState({
+      articles: parsedData.results,
+       totalResults: parsedData.totalResults,
+       page:this.state.page+1
+      });
+  this.props.setProgress(100);
 
-    let data = await fetch(url);
+  }
+  fetchMoreData=async()=>{
+    let data = await fetch(`https://newsdata2.p.rapidapi.com/news?country=${this.props.country}&category=${this.props.category}&language=en&page=${this.state.page+1}`,this.options);
     let parsedData = await data.json();
     console.log(parsedData);
     this.setState({
-      articles: this.state.articles.concat(parsedData.articles),
+      articles: this.state.articles.concat(parsedData.results),
       totalResults: parsedData.totalResults,
       page:this.state.page+1
     });
-    
+    console.log(this.state.articles.length)
+    console.log(this.state.totalResults);
   }
   render() {
     console.log("render");
@@ -105,34 +151,30 @@ export class News extends Component {
       <div className="container my-3">
         <h3 className='asset1 text-center text-light'>Top {this.props.category} headlines</h3>
         <div className="container">
-        <InfiniteScroll
-          dataLength={this.state.articles.length}
+        {/* <InfiniteScroll
+          dataLength={'10'}
           next={this.fetchMoreData}
           hasMore={this.state.articles.length!==this.state.totalResults}
-          loader={<Spinner/>}
-          endMessage={
-            <p style={{ textAlign: 'center' }}>
-              <b>That's all for the news!</b>
-            </p>
-          }>
+          loader={<Spinner/>}> */}
             <div className="container">
             <div className="row">
               {this.state.articles.map((element) => {
                 return (
-                  <div className="col-md-4" key={element.url}>
-                    <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.description ? element.description.slice(0, 88) : ""} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
+                  <div className="col-md-4" key={element.link}>
+                    <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.description ? element.description.slice(0, 88) : ""} imageUrl={element.image_url} newsUrl={element.link} author={element.source_id} date={element.pubDate}/>
                   </div>);
               })}
             </div>
             </div>
-            </InfiniteScroll >
+            {/* </InfiniteScroll> */}
             </div>
-            </div>
+          
 
-          /* <div className="container d-flex justify-content-between">
+          <div className="container d-flex justify-content-between">
           <button type="button" className="btn btn-primary" onClick={this.handlePrevClick} disabled={true ? this.state.page <= 1 : false}>&larr; Previous</button>
           <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} type="button" className="btn btn-primary" onClick={this.handleNextClick}>Next &rarr;</button>
-        </div> */
+        </div> 
+        </div>
     )
   }
 }
