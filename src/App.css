@@ -59,11 +59,9 @@ background-size: cover;
  .nav-link:hover{
   background-color: rgb(8, 116, 152);
  }
-.asset1{
-  color: rgb(67, 95, 239);
-  font-family:'Times New Roman', Times, serif;
-  font-weight: bold;
-  text-decoration: underline;
+.asset-1{
+  background-color: #008fb2;
+  box-shadow: 0 2px 11px 0px;
 }
  .navbar-brand{
   font-size: 1.6rem;

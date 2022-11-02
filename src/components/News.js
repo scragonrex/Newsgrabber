@@ -103,7 +103,7 @@ export class News extends Component {
     console.log("render");
     return (
       <div className="container my-3">
-        <h3 className='asset1 text-center text-light'>Top {this.props.category} headlines</h3>
+        <h3 className='text-center text-light' style={{marginTop:'75px'}}>Top {this.props.category} headlines</h3>
         <div className="container">
         <InfiniteScroll
           dataLength={this.state.articles.length}
