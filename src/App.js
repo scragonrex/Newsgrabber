@@ -8,13 +8,17 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+
 export default class App extends Component {
   state={progress:0}
+
   setProgress=(progress)=>
   {
     this.setState({progress:progress});
   }
+
   apiKey=process.env.REACT_APP_NEWS_API;
+  
   render()
   {
     return(
