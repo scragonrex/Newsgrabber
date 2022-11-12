@@ -34,7 +34,7 @@ const News = (props) => {
       }
     };
     
-    fetch('https://newscatcher.p.rapidapi.com/v1/latest_headlines?lang=en&country=%20in&media=True', options)
+    fetch(`https://newscatcher.p.rapidapi.com/v1/latest_headlines?topic=${props.category}&lang=en&country=%20in&media=True`, options)
       .then(response => response.json())
       .then(data => setArticles(data.articles))
       .catch(err => console.error(err));
