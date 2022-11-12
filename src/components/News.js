@@ -8,7 +8,7 @@ const News = (props) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [totalResults, setTotalResults] = useState(0);
+  // const [totalResults, setTotalResults] = useState(0);
   document.title = `${props.category}-Newsgrabber`;
 
   const pageChange=(event,value)=>
@@ -45,7 +45,7 @@ const News = (props) => {
       .catch(err => console.error(err));
       setLoading(false)
       console.log(articles)
-      setTotalResults(articles.length)
+      // setTotalResults(articles.length)
   }
   useEffect(() => {
     updatePage();
@@ -70,7 +70,7 @@ const News = (props) => {
         </Box>
       </Box>
         <Box sx={{display:"flex", justifyContent:"center"}}>
-        <Pagination count={totalResults/10} page={page} onChange={pageChange} size="medium"/>
+        <Pagination count={articles.length/10} page={page} onChange={pageChange} size="medium"/>
         </Box>
     </Box>
   )
