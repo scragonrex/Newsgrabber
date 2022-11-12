@@ -2,7 +2,7 @@ import React from 'react'
 
 const NewsItem=(props)=> {
     let {title,description,imageUrl,newsUrl,author, date}=props;
-    if(props==undefined)
+    if(props===undefined)
     return(
       <div><h2>That's all for the news</h2></div>
     )

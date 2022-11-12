@@ -5,15 +5,15 @@ const News = (props) => {
 
   const [articles, setArticles] = useState([]);
   // const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [totalResults, setTotalResults] = useState(10);
+  // const [page, setPage] = useState(1);
+  // const [totalResults, setTotalResults] = useState(10);
   document.title = `${props.category}-Newsgrabber`;
 
 
   const updatePage = async () => {
     console.log("updatePage")
     props.changeProgress(10);
-    console.log(page);
+    // console.log(page);
     // let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
 
     // let data = await fetch(url);
