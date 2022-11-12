@@ -21,14 +21,13 @@ const App=()=>{
         progress={progress}
       />
     <Routes>
-      <Route exact path="/" element={<News apiKey={apiKey} changeProgress={changeProgress} key="General" pageSize={9} country="in" category="news" />}/>
-      <Route exact path="/General" element={<News apiKey={apiKey} changeProgress={changeProgress} key="General" pageSize={9} country="in" category="news" />}/>
-      <Route exact path="/Business" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Business" pageSize={9} country="in" category="business"/>}/>
-        <Route exact path="/Science" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Science" pageSize={9} country="in" category="science"/>}/>
-        <Route exact path="/Sports" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Sports" pageSize={9} country="in" category="sport"/>}/>
-        <Route exact path="/Entertainment" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Entertainment" pageSize={9} country="in" category="entertainment" />}/>
-        <Route exact path="/Health" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Health" pageSize={9} country="in" category="food"/>}/>
-        <Route exact path="/Technology" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Technology" pageSize={9}country="in" category="tech"/>}/>
+      <Route exact path="/" element={<News apiKey={apiKey} changeProgress={changeProgress} key="general" pageSize={9} country="in" category="news" />}/>
+      <Route exact path="/business" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Business" pageSize={9} country="in" category="business"/>}/>
+        <Route exact path="/science" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Science" pageSize={9} country="in" category="science"/>}/>
+        <Route exact path="/sport" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Sports" pageSize={9} country="in" category="sport"/>}/>
+        <Route exact path="/entertainment" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Entertainment" pageSize={9} country="in" category="entertainment" />}/>
+        <Route exact path="/food" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Health" pageSize={9} country="in" category="food"/>}/>
+        <Route exact path="/tech" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Technology" pageSize={9}country="in" category="tech"/>}/>
     </Routes>
     </BrowserRouter>
   )

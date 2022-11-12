@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import NewsItem from './NewsItem'
 import PropTypes from 'prop-types'
+import { CircularProgress, Pagination } from '@mui/material';
+import { Box } from '@mui/system';
 const News = (props) => {
 
   const [articles, setArticles] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [page, setPage] = useState(1);
-  // const [totalResults, setTotalResults] = useState(10);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(0);
   document.title = `${props.category}-Newsgrabber`;
 
-
+  const pageChange=(event,value)=>
+  {
+    setPage(value);
+  }
   const updatePage = async () => {
     console.log("updatePage")
     props.changeProgress(10);
@@ -34,40 +39,45 @@ const News = (props) => {
       }
     };
     
-    fetch(`https://newscatcher.p.rapidapi.com/v1/latest_headlines?topic=${props.category}&lang=en&country=%20in&media=True`, options)
+    fetch(`https://newscatcher.p.rapidapi.com/v1/latest_headlines?&lang=en&topic=${props.category}&country=%20in&media=True`, options)
       .then(response => response.json())
       .then(data => setArticles(data.articles))
       .catch(err => console.error(err));
+      setLoading(false)
       console.log(articles)
+      setTotalResults(articles.length)
   }
   useEffect(() => {
     updatePage();
     // eslint-disable-next-line
-  }, [])
+  }, [page])
 
   console.log("render");
-  return (
-    <div className="container my-3">
+  if(!loading)
+  {return (
+    < Box className="container my-3">
       <h3 className='text-center text-light' style={{ marginTop: '75px' }}>Top {props.category} headlines</h3>
-      <div className="container">
-        <div className="container">
-          <div className="row">
-            {articles.map((element, index) => {
+      <Box className="container">
+        <Box className="container">
+          <Box className="row">
+            {articles.slice((page-1)*9, ((page-1)*9)+9).map((element, index) => {
               return (
-                <div className="col-md-4" key={index}>
+                <Box className="col-md-4" key={index}>
                   <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.summary ? element.summary.slice(0, 88) : ""} imageUrl={element.media} newsUrl={element.link} author={element.author} date={element.published_date} source={element.topic} />
-                </div>);
+                </Box>);
             })}
-          </div>
-        </div>
-      </div>
-
-      {/* <div className="container d-flex justify-content-between">
-        <button type="button" className="btn btn-primary" onClick={() => { setPage(page - 1) }}>&larr; Previous</button>
-        <button type="button" className="btn btn-primary" onClick={() => { setPage(page + 1) }}>Next &rarr;</button>
-      </div> */}
-    </div>
+          </Box>
+        </Box>
+      </Box>
+        <Box sx={{display:"flex", justifyContent:"center"}}>
+        <Pagination count={totalResults/10} page={page} onChange={pageChange} size="medium"/>
+        </Box>
+    </Box>
   )
+}
+else
+return(<CircularProgress />)
+
 }
 News.defaultProps = {
   country: 'in',
