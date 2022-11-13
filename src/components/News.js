@@ -1,98 +1,71 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import NewsItem from './NewsItem'
-import InfiniteScroll from "react-infinite-scroll-component";
-import Spinner from './Spinner';
+import PropTypes from 'prop-types'
+import {Pagination } from '@mui/material';
+import { Box } from '@mui/system';
 
+const News = (props) => {
+  const [articles, setArticles] = useState([]);
+  const [page, setPage] = useState(1);
+  document.title = `${props.category}-Newsgrabber`;
 
-export class News extends Component {
-
-  static defaultProps = {
-    country: 'in',
-    category: 'General',
-    pageSize: 6
+  const pageChange = (event, value) => {
+    setPage(value);
   }
 
-  constructor(props) {
-    super(props);
-    console.log("Hello ");
-    this.state = {
-      articles: [],
-      loading: false,
-      page: 1,
-      totalResults: 0,
-    };
-    document.title = `${this.props.category}-Newsgrabber`;
-  }
-
-  async updatePage() {
+  const updatePage = async () => {
     console.log("updatePage")
-    this.props.setProgress(10);
-    console.log(this.state.page);
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    props.changeProgress(10);
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': 'a47529c91emsha25daef1e66a341p1ba7adjsn5c4aed17e5e6',
+        'X-RapidAPI-Host': 'newscatcher.p.rapidapi.com'
+      }
+    };
 
-    let data = await fetch(url);
-    this.props.setProgress(30);
-    let parsedData = await data.json();
-    this.props.setProgress(50);
-    console.log(parsedData);
-    this.setState({
-      articles: parsedData.articles,
-      totalResults: parsedData.totalResults,
-
-    });
-    this.props.setProgress(100);
-
+    fetch(`https://newscatcher.p.rapidapi.com/v1/latest_headlines?&lang=en&topic=${props.category}&country=%20in&media=True`, options)
+      .then(response => response.json())
+      .then(data => setArticles(data.articles))
+      .catch(err => console.error(err));
+      console.log(articles)
+      props.changeProgress(100);
   }
 
-  async componentDidMount() {
-    this.updatePage();
-  }
- 
-  fetchMoreData = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+  useEffect(() => {
+      updatePage();
+    // eslint-disable-next-line
+  }, [page])
 
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    console.log(parsedData);
-    this.setState({
-      articles: this.state.articles.concat(parsedData.articles),
-      totalResults: parsedData.totalResults,
-      page: this.state.page + 1
-    });
-  }
-
-
-  render() {
-    console.log("render");
-    return (
-      <div className="container my-3">
-        <h3 className='text-center text-light' style={{ marginTop: '75px' }}>Top {this.props.category} headlines</h3>
-        <div className="container">
-          <InfiniteScroll
-            dataLength={this.state.articles.length}
-            next={this.fetchMoreData}
-            hasMore={this.state.articles.length !== this.state.totalResults}
-            loader={<Spinner />}
-            endMessage={
-              <p style={{ textAlign: 'center' }}>
-                <b>That's all for the news!</b>
-              </p>
-            }>
-            <div className="container">
-              <div className="row">
-                {this.state.articles.map((element) => {
-                  return (
-                    <div className="col-md-4" key={element.url}>
-                      <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.description ? element.description.slice(0, 88) : ""} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
-                    </div>);
-                })}
-              </div>
-            </div>
-          </InfiniteScroll >
-        </div>
-      </div>
-    )
-  }
+  return (
+    < Box className="container my-3">
+      <h3 className='text-center text-dark' style={{ marginTop: '75px' }}>Top {props.category} headlines</h3>
+      <Box className="container">
+        <Box className="row">
+          {articles.slice((page - 1) * 9, ((page - 1) * 9) + 9).map((element, index) => {
+            return (
+              <Box className="col-md-4" key={index}>
+                <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.summary ? element.summary.slice(0, 88) : ""} imageUrl={element.media} newsUrl={element.link} author={element.author} date={element.published_date} source={element.topic} />
+              </Box>);
+          })}
+        </Box>
+      </Box>
+      <Box sx={{display: "flex", justifyContent: "center"}} >
+        <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="large" sx={{display:{xs:"none", sm:"block"}}}/>
+        <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="small" sx={{display:{xs:"block", sm:"none"}}}/>
+      </Box>
+    </Box>
+  )
 }
 
+News.defaultProps = {
+  country: 'in',
+  category: 'General',
+  pageSize: 6
+}
+News.propTypes = {
+  country: PropTypes.string,
+  category: PropTypes.string,
+  pageSize: PropTypes.number
+}
 export default News
