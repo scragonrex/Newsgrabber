@@ -52,7 +52,7 @@ const News = (props) => {
       </Box>
       <Box sx={{display: "flex", justifyContent: "center"}} >
         <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="large" sx={{display:{xs:"none", sm:"block"}}}/>
-        <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="medium" sx={{display:{xs:"block", sm:"none"}}}/>
+        <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="small" sx={{display:{xs:"block", sm:"none"}}}/>
       </Box>
     </Box>
   )
