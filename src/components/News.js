@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NewsItem from './NewsItem'
 import PropTypes from 'prop-types'
-import {Pagination } from '@mui/material';
+import {Grid, Pagination } from '@mui/material';
 import { Box } from '@mui/system';
 
 const News = (props) => {
@@ -38,21 +38,24 @@ const News = (props) => {
   }, [page])
 
   return (
-    < Box className="container my-3">
+    < Box m={5} mt={10}>
       <h3 className='text-center text-dark' style={{ marginTop: '75px' }}>Top {props.category} headlines</h3>
-      <Box className="container">
+      <Box>
         <Box className="row">
           {articles.slice((page - 1) * 9, ((page - 1) * 9) + 9).map((element, index) => {
             return (
-              <Box className="col-md-4" key={index}>
+              <Grid container rowSpacing={1} key={index}>
+                <Grid item>
+               
                 <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.summary ? element.summary.slice(0, 88) : ""} imageUrl={element.media} newsUrl={element.link} author={element.author} date={element.published_date} source={element.topic} />
-              </Box>);
+              </Grid>
+              </Grid>);
           })}
         </Box>
       </Box>
       <Box sx={{display: "flex", justifyContent: "center"}} >
         <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="large" sx={{display:{xs:"none", sm:"block"}}}/>
-        <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="small" sx={{display:{xs:"block", sm:"none"}}}/>
+        <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="medium" sx={{display:{xs:"block", sm:"none"}}}/>
       </Box>
     </Box>
   )
