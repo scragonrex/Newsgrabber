@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import NavBar from './components/NavBar';
 import News from './components/News';
 import {BrowserRouter, Routes,Route} from "react-router-dom";
-
 const App=()=>{
   const [progress, setProgress] = useState(0);
 
@@ -17,7 +16,7 @@ const App=()=>{
     <BrowserRouter>
     <NavBar/>
     <LoadingBar
-        color='#f11946'
+        color='blue'
         progress={progress}
       />
     <Routes>

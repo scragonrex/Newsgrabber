@@ -38,13 +38,12 @@
 }
 
 body{
-background:url("https://thumbs.dreamstime.com/b/abstract-gradient-blue-light-background-retro-colors-lot-space-text-composition-art-image-website-magazine-97327659.jpg");
-/* background-color: rgb(198, 250, 226); */
+background:rgb(199, 237, 247);
 background-size: cover;
 }
  .card
  {
-  background-color:rgb(69, 196, 177) ;
+  background-color:rgb(76, 202, 248) ;
   box-shadow: 0px 0px 5px black;
  }
 
@@ -60,7 +59,7 @@ background-size: cover;
   background-color: rgb(8, 116, 152);
  }
  .asset-1{
-  background-color: #008fb2;
+  background-color: #0abbe8;
   box-shadow: 0 2px 11px 0px;
  } 
  
