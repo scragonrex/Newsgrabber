@@ -25,7 +25,7 @@ const NewsItem=(props)=> {
     else
     {
       return(
-          <Card sx={{ width:"350px" , height:"380px", margin:"10px" }}>
+          <Card sx={{ minWidth: 275, margin:"10px" }}>
             <CardMedia
               component="img"
               height="140"
@@ -33,14 +33,15 @@ const NewsItem=(props)=> {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-              {title}...
+              {title||'title'}...
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2">
               {description}...
               </Typography>
+              <Typography mt={1} variant='body2'>By {author?author:"Unknown"} on {new Date(date).toGMTString()}</Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Read More</Button>
+              <Button component='a' href={newsUrl} target="_blank" size="small">Read More</Button>
             </CardActions>
           </Card>
       );
