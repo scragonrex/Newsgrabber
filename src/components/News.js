@@ -6,8 +6,8 @@ import { Box } from '@mui/system';
 
 const News = (props) => {
   const [show, setshow] = useState(false)
-  const [articles, setArticles] = useState([])
-  setArticles([
+  // const [articles, setArticles] = useState([
+    const articles=[
       {
         "_id": "51ef25074f9be9fb33ddc10c69de3dbc",
         "_score": 23.149832,
@@ -758,8 +758,7 @@ const News = (props) => {
         "title": "Grimes and Elon Musk alter baby's name to comply with Californian law",
         "topic": "NA"
       }
-    ]);
-
+    ];
   const [page, setPage] = useState(1);
   document.title = `${props.category}-Newsgrabber`;
 
@@ -784,6 +783,7 @@ const News = (props) => {
     //     'X-RapidAPI-Host': 'newscatcher.p.rapidapi.com'
     //   }
     // };
+
     // fetch(`https://newscatcher.p.rapidapi.com/v1/latest_headlines?&lang=en&topic=${props.category}&country=%20in&media=True`, options)
     //   .then(response => response.json())
     //   .then(data => setArticles(data.articles))
@@ -802,7 +802,7 @@ const News = (props) => {
 
   return (
     < Box m={1}>
-      <Typography textAlign={'center'} sx={{fontSize:{sm:'45px', xs:'25px'}, fontWeight:'bold'}}>Top {props.category} headlines</Typography>
+      <Typography textAlign={'center'} sx={{fontSize:{sm:'50px', xs:'27px'}, fontWeight:'bold'}}>Top {props.category} headlines</Typography>
       {!show && <Box mt={10} sx={{ display: 'flex' , justifyContent:'center'}}>
        <CircularProgress />
     </Box>}
