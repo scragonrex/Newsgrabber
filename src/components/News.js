@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import NewsItem from './NewsItem'
 import PropTypes from 'prop-types'
-import {Pagination } from '@mui/material';
+import { CircularProgress, Pagination, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 const News = (props) => {
+  const [show, setshow] = useState(false)
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   document.title = `${props.category}-Newsgrabber`;
@@ -12,6 +13,13 @@ const News = (props) => {
   const pageChange = (event, value) => {
     setPage(value);
   }
+
+  const pageBtn=
+    (<>
+    <Pagination color="primary" count={10} page={page} onChange={pageChange} size="medium" sx={{ display: { xs: "block", sm: "none" } }} />
+    <Pagination color="primary" count={10} page={page} onChange={pageChange} size="large" sx={{ display: { xs: "none", sm: "block" } }} />
+ </>)
+ 
 
   const updatePage = async () => {
     console.log("updatePage")
@@ -33,26 +41,29 @@ const News = (props) => {
   }
 
   useEffect(() => {
-      updatePage();
+    updatePage();
+    setTimeout(() => {
+      setshow(true)
+    }, 2000);
     // eslint-disable-next-line
   }, [page])
 
   return (
-    < Box className="container my-3">
-      <h3 className='text-center text-dark' style={{ marginTop: '75px' }}>Top {props.category} headlines</h3>
-      <Box className="container">
-        <Box className="row">
+    < Box m={1}>
+      <Typography textAlign={'center'} sx={{fontSize:{sm:'40px', xs:'27px'}, fontWeight:'bold'}}>Top {props.category} headlines</Typography>
+      {!show && <Box mt={10} sx={{ display: 'flex' , justifyContent:'center'}}>
+       <CircularProgress />
+    </Box>}
+        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: {xs:'repeat(1,1fr)', sm:'repeat(3, 1fr)'}}}>
           {articles.slice((page - 1) * 9, ((page - 1) * 9) + 9).map((element, index) => {
             return (
-              <Box className="col-md-4" key={index}>
                 <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.summary ? element.summary.slice(0, 88) : ""} imageUrl={element.media} newsUrl={element.link} author={element.author} date={element.published_date} source={element.topic} />
-              </Box>);
+             );
           })}
         </Box>
-      </Box>
-      <Box sx={{display: "flex", justifyContent: "center"}} >
-        <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="large" sx={{display:{xs:"none", sm:"block"}}}/>
-        <Pagination color="primary" count={ 10} page={page} onChange={pageChange} size="small" sx={{display:{xs:"block", sm:"none"}}}/>
+      
+      <Box mt={2} sx={{ display: "flex", justifyContent: "center" }} >
+        {show && pageBtn}
       </Box>
     </Box>
   )
