@@ -44,13 +44,13 @@ const News = (props) => {
     updatePage();
     setTimeout(() => {
       setshow(true)
-    }, 2000);
+    }, 2500);
     // eslint-disable-next-line
   }, [page])
 
   return (
     < Box m={1}>
-      <Typography textAlign={'center'} sx={{fontSize:{sm:'40px', xs:'27px'}, fontWeight:'bold'}}>Top {props.category} headlines</Typography>
+      <Typography mt={10} textAlign={'center'} sx={{fontSize:{ xs:'27px', md:'40px'}, fontWeight:'bold'}}>Top {props.category} headlines</Typography>
       {!show && <Box mt={10} sx={{ display: 'flex' , justifyContent:'center'}}>
        <CircularProgress />
     </Box>}
