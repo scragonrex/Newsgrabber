@@ -57,49 +57,27 @@ const NavBar = (props)=> {
   const container = window !== undefined ? () => window().document.body : undefined;  
 
     return (
-      // <div>
-      //   <nav className="navbar fixed-top asset-1 navbar-expand-lg">
-      //     <div className="container-fluid">
-      //       <Link to='#' className="navbar-brand text-light">News grabber</Link>
-      //       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      //         <span className="navbar-toggler-icon"></span>
-      //       </button>
-      //       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      //         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-      //           <li className="nav-item"><Link to='/' className="nav-link text-light" aria-current="page">Home</Link></li>
-      //           <li className="nav-item"><Link to='/business' className="nav-link text-light">Business</Link></li>
-      //           <li className="nav-item"><Link to='/food' className="nav-link text-light">Food</Link></li>
-      //           <li className="nav-item"><Link to='/' className="nav-link text-light">General</Link></li>
-      //           <li className="nav-item"><Link to='/science' className="nav-link text-light">Science</Link></li>
-      //           <li className="nav-item"><Link to='/entertainment' className="nav-link text-light">Entertainment</Link></li>
-      //           <li className="nav-item"><Link to='/tech' className="nav-link text-light">Technology</Link></li>
-      //           <li className="nav-item"><Link to='/sport' className="nav-link text-light">Sports</Link></li>
-      //         </ul>
-      //       </div>
-      //     </div>
-      //   </nav>
-      // </div>
       <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 , display:{sx:'block', sm:'none'}}}
-            onClick={handleDrawerToggle}
-          >
-            <MenuRounded/>
-          </IconButton>
+        <Toolbar > 
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: 2 , display:{sx:'block', md:'none'}}}
+                  onClick={handleDrawerToggle}
+                >
+                  <MenuRounded/>
+                </IconButton>
           <Typography component="a" href="/" variant="h5"  sx={{ fontWeight:'bold' , color:'inherit', textDecoration:'none'
               , "&:hover": {
-               color:'inherit',
+                color:'inherit',
                 cursor: "pointer"
                 }}}> 
             Newsgrabber
           </Typography>
-         <Stack direction='row' spacing={4} ml={4} sx={{display:{xs:'none', sm:'block'}}}>
+         <Stack direction='row' spacing={4} ml={4} sx={{display:{xs:'none', md:'block'}}}>
          {ItemEls}
          </Stack>
         </Toolbar>
@@ -114,7 +92,7 @@ const NavBar = (props)=> {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
             
           }}
