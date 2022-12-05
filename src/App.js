@@ -16,11 +16,12 @@ const App=()=>{
     <BrowserRouter>
     <NavBar/>
     <LoadingBar
-        color='blue'
+        color='#03d366'
         progress={progress}
+        height='4px'
       />
     <Routes>
-      <Route exact path="/" element={<News apiKey={apiKey} changeProgress={changeProgress} key="general" pageSize={9} country="in" category="news" />}/>
+      <Route exact path="/" element={<News apiKey={apiKey} changeProgress={changeProgress} key="general" pageSize={9} country="in" category="General" />}/>
       <Route exact path="/business" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Business" pageSize={9} country="in" category="business"/>}/>
         <Route exact path="/science" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Science" pageSize={9} country="in" category="science"/>}/>
         <Route exact path="/sport" element={<News apiKey={apiKey} changeProgress={changeProgress} key="Sports" pageSize={9} country="in" category="sport"/>}/>

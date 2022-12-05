@@ -14,12 +14,12 @@ const News = (props) => {
     setPage(value);
   }
 
-  const pageBtn=
+  const pageBtn =
     (<>
-    <Pagination color="primary" count={10} page={page} onChange={pageChange} size="medium" sx={{ display: { xs: "block", sm: "none" } }} />
-    <Pagination color="primary" count={10} page={page} onChange={pageChange} size="large" sx={{ display: { xs: "none", sm: "block" } }} />
- </>)
- 
+      <Pagination color="primary" count={10} page={page} onChange={pageChange} size="medium" sx={{ display: { xs: "block", sm: "none" } }} />
+      <Pagination color="primary" count={10} page={page} onChange={pageChange} size="large" sx={{ display: { xs: "none", sm: "block" } }} />
+    </>)
+
 
   const updatePage = async () => {
     console.log("updatePage")
@@ -38,30 +38,43 @@ const News = (props) => {
       .catch(err => console.error(err));
       console.log(articles)
       props.changeProgress(100);
+    // props.changeProgress(10);
+    // console.log(page);
+    // let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}`;
+
+    // let data = await fetch(url);
+    // props.changeProgress(30);
+    // let parsedData = await data.json();
+    // props.changeProgress(50);
+    // console.log(parsedData);
+    // setArticles(parsedData.articles);
+    // console.log(articles);
+   
+    // props.changeProgress(100);
   }
 
   useEffect(() => {
     updatePage();
     setTimeout(() => {
       setshow(true)
-    }, 2500);
+    }, 2000);
     // eslint-disable-next-line
   }, [page])
 
   return (
     < Box m={1}>
-      <Typography mt={10} textAlign={'center'} sx={{fontSize:{ xs:'27px', md:'40px'}, fontWeight:'bold'}}>Top {props.category} headlines</Typography>
-      {!show && <Box mt={10} sx={{ display: 'flex' , justifyContent:'center'}}>
-       <CircularProgress />
-    </Box>}
-        <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: {xs:'repeat(1,1fr)', sm:'repeat(3, 1fr)'}}}>
-          {articles.slice((page - 1) * 9, ((page - 1) * 9) + 9).map((element, index) => {
+      <Typography mt={10} textAlign={'center'} sx={{ fontSize: { xs: '27px', md: '40px' }, fontWeight: 'bold' }}>Top {props.category} headlines</Typography>
+      {/* {!show && <Box className='asset-3' mt={10} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>} */}
+         <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: { xs: 'repeat(1,1fr)', sm: 'repeat(3, 1fr)' }, }}>
+           {articles.slice((page - 1) * 9, ((page - 1) * 9) + 9).map((element, index) => {
             return (
-                <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.summary ? element.summary.slice(0, 88) : ""} imageUrl={element.media} newsUrl={element.link} author={element.author} date={element.published_date} source={element.topic} />
-             );
-          })}
-        </Box>
-      
+            <NewsItem title={element.title ? element.title.slice(0, 45) : ""} description={element.summary ? element.summary.slice(0, 88) : ""} imageUrl={element.media} newsUrl={element.link} author={element.author} date={element.published_date} source={element.topic} />
+            );
+           })}
+         </Box>
+
       <Box mt={2} sx={{ display: "flex", justifyContent: "center" }} >
         {show && pageBtn}
       </Box>
