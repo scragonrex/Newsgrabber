@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { MenuRounded } from '@mui/icons-material';
+import { Biotech, Business, Category, Dashboard, Home, LiveTv, MenuRounded, RamenDining, Science, SportsCricket } from '@mui/icons-material';
 import { AppBar, Box, Divider, Drawer, IconButton, Stack, Toolbar, Typography } from '@mui/material';
 import React from 'react'
 import { Link } from "react-router-dom";
@@ -28,16 +28,29 @@ const NavBar = (props)=> {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const ItemEls=(
+  const ItemEls1=(
     <>
+    <Box sx={{display:'flex', alignItems:'center'}}><Home sx={{color:'white'}}/><Item to='/' aria-current="page">Home</Item></Box>
+    <Box ml={1} sx={{display:'flex', alignItems:'center'}}><Business sx={{color:'white'}}/><Item to='/business'>Business</Item></Box>
+    <Box ml={1} sx={{display:'flex', alignItems:'center'}}><RamenDining sx={{color:'white'}}/><Item to='/food'>Food</Item></Box>
+    <Box ml={1} sx={{display:'flex', alignItems:'center'}}><Dashboard sx={{color:'white'}}/><Item to='/'>General</Item></Box>
+    <Box ml={1} sx={{display:'flex', alignItems:'center'}}><Science sx={{color:'white'}}/><Item to='/science'>Science</Item></Box>
+    <Box ml={1} sx={{display:'flex', alignItems:'center'}}><LiveTv sx={{color:'white'}}/><Item to='/entertainment'>Entertainment</Item></Box>
+    <Box ml={1} sx={{display:'flex', alignItems:'center'}}><Biotech sx={{color:'white'}}/><Item to='/tech'>Technology</Item></Box>
+    <Box ml={1} sx={{display:'flex', alignItems:'center'}}><SportsCricket sx={{color:'white'}}/><Item to='/sport'>Sports</Item></Box>
+    </>
+  )
+  const ItemEls=(
+  <>
     <Item to='/' aria-current="page">Home</Item>
-         <Item to='/business'>Business</Item>
-         <Item to='/food'>Food</Item>
-         <Item to='/'>General</Item>
-         <Item to='/science'>Science</Item>
-         <Item to='/entertainment'>Entertainment</Item>
-         <Item to='/tech'>Technology</Item>
-         <Item to='/sport'>Sports</Item></>
+    <Item to='/business'>Business</Item>
+    <Item to='/food'>Food</Item>
+    <Item to='/'>General</Item>
+    <Item to='/science'>Science</Item>
+    <Item to='/entertainment'>Entertainment</Item>
+    <Item to='/tech'>Technology</Item>
+    <Item to='/sport'>Sports</Item>
+  </>
   )
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -45,10 +58,10 @@ const NavBar = (props)=> {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'left',backgroundColor:"#0d6efd", height:"100vh"}}> 
-    <Typography variant='h5' color="white" m={1} textAlign='center' >Categories</Typography>
+    <Box m={1} sx={{display:'flex', alignItems:'center'}}><Category sx={{color:'white',marginRight:'4px'}}/><Typography variant='h5' color="white" >Categories</Typography></Box>
     <Divider sx={{ borderBottomWidth: 2, bgcolor:"white"}} />
-      <Stack direction='column' spacing={1} m={1} textAlign='center'>
-        {ItemEls}
+      <Stack direction='column' spacing={1} m={1} >
+        {ItemEls1}
          </Stack>
   
     </Box>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NewsItem from './NewsItem'
 import PropTypes from 'prop-types'
-import { CircularProgress, Pagination, Typography } from '@mui/material';
+import { Pagination, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 const News = (props) => {
@@ -16,7 +16,7 @@ const News = (props) => {
 
   const pageBtn =
     (<>
-      <Pagination color="primary" count={10} page={page} onChange={pageChange} size="medium" sx={{ display: { xs: "block", sm: "none" } }} />
+      <Pagination variant='outlined' color="primary" count={10} page={page} onChange={pageChange} size="medium" sx={{ display: { xs: "block", sm: "none" } }} />
       <Pagination color="primary" count={10} page={page} onChange={pageChange} size="large" sx={{ display: { xs: "none", sm: "block" } }} />
     </>)
 
@@ -64,9 +64,7 @@ const News = (props) => {
   return (
     < Box m={1}>
       <Typography mt={10} textAlign={'center'} sx={{ fontSize: { xs: '27px', md: '40px' }, fontWeight: 'bold' }}>Top {props.category} headlines</Typography>
-      {/* {!show && <Box className='asset-3' mt={10} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CircularProgress />
-      </Box>} */}
+  
          <Box sx={{ display: 'grid', gap: 1, gridTemplateColumns: { xs: 'repeat(1,1fr)', sm: 'repeat(3, 1fr)' }, }}>
            {articles.slice((page - 1) * 9, ((page - 1) * 9) + 9).map((element, index) => {
             return (
