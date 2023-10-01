@@ -1,3 +1,33 @@
+# NewsHub - Your Source for Latest News
+
+![NewsHub Preview](https://github.com/scragonrex/Newsgrabber/assets/106229957/2e70ed3d-b16d-45b8-935c-d3e47e00aa16)
+
+NewsHub is a single-page web application that provides users with the latest news headlines from various categories. It utilizes the newscatcher API to fetch real-time news data and offers a seamless browsing experience through React Router.
+
+## Features
+
+- **Real-Time Updates**: Get the most up-to-date news headlines.
+- **Category Navigation**: Explore news articles by categories like sports, science, and business.
+- **Smooth Transitions**: Enjoy seamless page transitions powered by React Router.
+
+## Demo
+Check out our live demo [here](https://newsgrabberz.netlify.app/).
+
+## Getting Started
+
+1. Clone the repository: `git clone https://github.com/yourusername/newshub.git`
+2. Install dependencies: `npm install`
+3. Start the application: `npm start`
+
+## Contributing
+
+We welcome contributions! If you want to contribute to NewsHub, please follow our [Contribution Guidelines](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
